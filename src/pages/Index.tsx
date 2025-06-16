@@ -1,17 +1,59 @@
-
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Download, Github, Linkedin, Facebook, Instagram, Mail, Phone, MapPin, ExternalLink, Calendar, Code, Database } from 'lucide-react';
+import { Moon, Sun, Download, Github, Linkedin, Facebook, Instagram, Mail, Phone, MapPin, ExternalLink, Calendar, Code, Database, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Index = () => {
   const [isDark, setIsDark] = useState(true);
   const [activeSection, setActiveSection] = useState('hero');
+  const [typewriterText, setTypewriterText] = useState('');
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const { toast } = useToast();
+
+  const typewriterWords = [
+    'Building digital experiences',
+    'Creating innovative solutions',
+    'Developing modern web apps',
+    'Integrating AI technologies',
+    'Crafting user-friendly interfaces'
+  ];
+
+  // Typewriter effect
+  useEffect(() => {
+    const word = typewriterWords[currentWordIndex];
+    let currentText = '';
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const typeWriter = () => {
+      if (!isDeleting && charIndex < word.length) {
+        currentText += word[charIndex];
+        charIndex++;
+        setTypewriterText(currentText);
+        setTimeout(typeWriter, 100);
+      } else if (isDeleting && charIndex > 0) {
+        currentText = currentText.slice(0, -1);
+        charIndex--;
+        setTypewriterText(currentText);
+        setTimeout(typeWriter, 50);
+      } else if (!isDeleting && charIndex === word.length) {
+        setTimeout(() => {
+          isDeleting = true;
+          typeWriter();
+        }, 2000);
+      } else if (isDeleting && charIndex === 0) {
+        setCurrentWordIndex((prev) => (prev + 1) % typewriterWords.length);
+        isDeleting = false;
+        setTimeout(typeWriter, 500);
+      }
+    };
+
+    typeWriter();
+  }, [currentWordIndex]);
 
   useEffect(() => {
     if (isDark) {
@@ -27,6 +69,10 @@ const Index = () => {
       title: "Message Sent!",
       description: "Thank you for reaching out. I'll get back to you soon!",
     });
+  };
+
+  const handleCallUs = () => {
+    window.open('tel:+918538945025', '_self');
   };
 
   const technologies = [
@@ -132,6 +178,17 @@ const Index = () => {
     }
   };
 
+  const textUpDownVariants = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-slate-100">
@@ -147,9 +204,15 @@ const Index = () => {
             <motion.div 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-xl font-bold"
             >
-              RKS
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                variants={textUpDownVariants}
+                animate="animate"
+              >
+                Codelabs India
+              </motion.span>
             </motion.div>
             
             <div className="hidden md:flex items-center space-x-8">
@@ -163,7 +226,9 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {item}
+                  <motion.span variants={textUpDownVariants} animate="animate">
+                    {item}
+                  </motion.span>
                   <motion.div
                     className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600"
                     whileHover={{ width: "100%" }}
@@ -173,16 +238,28 @@ const Index = () => {
               ))}
             </div>
 
-            <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsDark(!isDark)}
-                className="p-2"
-              >
-                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
-            </motion.div>
+            <div className="flex items-center space-x-4">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  onClick={handleCallUs}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full transition-all duration-300"
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  Call Us
+                </Button>
+              </motion.div>
+              
+              <motion.div whileHover={{ rotate: 180 }} transition={{ duration: 0.3 }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsDark(!isDark)}
+                  className="p-2"
+                >
+                  {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </motion.nav>
 
@@ -207,28 +284,59 @@ const Index = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <motion.h1 
-                className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
+                className="text-5xl md:text-7xl font-bold mb-6"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.2 }}
               >
-                Rupam Kumar Singh
+                <motion.span 
+                  className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
+                  variants={textUpDownVariants}
+                  animate="animate"
+                >
+                  Rupam Kumar Singh
+                </motion.span>
               </motion.h1>
               
-              <motion.p 
-                className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto"
+              <motion.div 
+                className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-4 max-w-3xl mx-auto h-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.4 }}
               >
-                Building digital experiences with passion and precision
-              </motion.p>
-              
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                <motion.span
+                  key={typewriterText}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                >
+                  {typewriterText}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="ml-1 text-blue-600"
+                  >
+                    |
+                  </motion.span>
+                </motion.span>
+              </motion.div>
+
+              <motion.p 
+                className="text-lg text-slate-500 dark:text-slate-400 mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.6 }}
+              >
+                <motion.span variants={textUpDownVariants} animate="animate">
+                  with passion and precision
+                </motion.span>
+              </motion.p>
+              
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Button 
@@ -251,7 +359,8 @@ const Index = () => {
                     { href: "https://github.com/RupamSingh333", icon: Github },
                     { href: "https://www.linkedin.com/in/rupam-kumar-1061321b2", icon: Linkedin },
                     { href: "https://www.facebook.com/Rupamsingh.0007", icon: Facebook },
-                    { href: "https://www.instagram.com/rupamsingh_007", icon: Instagram }
+                    { href: "https://www.instagram.com/rupamsingh_007", icon: Instagram },
+                    { href: "https://youtube.com/@codelabs_india?si=GtP7PycEuJZFVar0", icon: Youtube }
                   ].map((social, index) => (
                     <motion.a
                       key={index}
@@ -263,12 +372,29 @@ const Index = () => {
                       whileTap={{ scale: 0.9 }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                      transition={{ duration: 0.5, delay: 1.0 + index * 0.1 }}
                     >
                       <social.icon className="h-6 w-6" />
                     </motion.a>
                   ))}
                 </div>
+              </motion.div>
+
+              {/* Phone number display */}
+              <motion.div
+                className="text-lg font-semibold text-slate-600 dark:text-slate-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.2 }}
+              >
+                <motion.div
+                  className="flex items-center justify-center space-x-2"
+                  variants={textUpDownVariants}
+                  animate="animate"
+                >
+                  <Phone className="h-5 w-5 text-green-600" />
+                  <span>+91 8538945025</span>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
@@ -278,13 +404,19 @@ const Index = () => {
         <section id="about" className="py-20 bg-white/50 dark:bg-slate-800/50">
           <div className="container mx-auto px-6">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl font-bold text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              About Me
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                variants={textUpDownVariants}
+                animate="animate"
+              >
+                About Me
+              </motion.span>
             </motion.h2>
             
             <div className="max-w-4xl mx-auto">
@@ -296,21 +428,31 @@ const Index = () => {
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
                 >
-                  <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                    I'm a passionate software developer with expertise in modern web technologies and AI integration. 
+                  <motion.p 
+                    className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
+                    variants={textUpDownVariants}
+                    animate="animate"
+                  >
+                    I'm a passionate software developer at <strong className="text-blue-600">Codelabs India</strong> with expertise in modern web technologies and AI integration. 
                     I love creating digital solutions that make a real impact.
-                  </p>
+                  </motion.p>
                   
-                  <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <motion.p 
+                    className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
+                    variants={textUpDownVariants}
+                    animate="animate"
+                  >
                     With experience in full-stack development, I specialize in building scalable applications 
                     using React, Next.js, Node.js, and various databases. I'm also passionate about integrating 
                     AI technologies to create intelligent, user-friendly solutions.
-                  </p>
+                  </motion.p>
                   
                   <div className="flex flex-wrap gap-4">
                     <motion.div 
                       className="flex items-center space-x-2 text-slate-600 dark:text-slate-300"
                       whileHover={{ x: 5 }}
+                      variants={textUpDownVariants}
+                      animate="animate"
                     >
                       <MapPin className="h-5 w-5 text-blue-600" />
                       <span>India</span>
@@ -318,9 +460,27 @@ const Index = () => {
                     <motion.div 
                       className="flex items-center space-x-2 text-slate-600 dark:text-slate-300"
                       whileHover={{ x: 5 }}
+                      variants={textUpDownVariants}
+                      animate="animate"
                     >
                       <Mail className="h-5 w-5 text-blue-600" />
                       <span>rupamkumar333@gmail.com</span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center space-x-2 text-slate-600 dark:text-slate-300"
+                      whileHover={{ x: 5 }}
+                      variants={textUpDownVariants}
+                      animate="animate"
+                    >
+                      <Youtube className="h-5 w-5 text-red-600" />
+                      <a 
+                        href="https://youtube.com/@codelabs_india?si=GtP7PycEuJZFVar0" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-red-600 transition-colors"
+                      >
+                        Codelabs India Channel
+                      </a>
                     </motion.div>
                   </div>
                 </motion.div>
@@ -343,7 +503,9 @@ const Index = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="w-64 h-64 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
-                      RKS
+                      <motion.span variants={textUpDownVariants} animate="animate">
+                        RKS
+                      </motion.span>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -356,13 +518,19 @@ const Index = () => {
         <section id="technologies" className="py-20">
           <div className="container mx-auto px-6">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl font-bold text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Technologies
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                variants={textUpDownVariants}
+                animate="animate"
+              >
+                Technologies
+              </motion.span>
             </motion.h2>
             
             <motion.div 
@@ -392,7 +560,13 @@ const Index = () => {
                       >
                         {tech.icon}
                       </motion.div>
-                      <h3 className="font-semibold text-slate-800 dark:text-slate-200">{tech.name}</h3>
+                      <motion.h3 
+                        className="font-semibold text-slate-800 dark:text-slate-200"
+                        variants={textUpDownVariants}
+                        animate="animate"
+                      >
+                        {tech.name}
+                      </motion.h3>
                       <motion.div 
                         className={`mt-2 h-1 bg-gradient-to-r ${tech.color} rounded-full`}
                         initial={{ width: 0 }}
@@ -412,13 +586,19 @@ const Index = () => {
         <section id="projects" className="py-20 bg-white/50 dark:bg-slate-800/50">
           <div className="container mx-auto px-6">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl font-bold text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Featured Projects
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                variants={textUpDownVariants}
+                animate="animate"
+              >
+                Featured Projects
+              </motion.span>
             </motion.h2>
             
             <motion.div 
@@ -472,12 +652,18 @@ const Index = () => {
                       <motion.h3 
                         className="text-xl font-bold mb-3 text-slate-800 dark:text-slate-200"
                         whileHover={{ color: "#3b82f6" }}
+                        variants={textUpDownVariants}
+                        animate="animate"
                       >
                         {project.title}
                       </motion.h3>
-                      <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm leading-relaxed">
+                      <motion.p 
+                        className="text-slate-600 dark:text-slate-300 mb-4 text-sm leading-relaxed"
+                        variants={textUpDownVariants}
+                        animate="animate"
+                      >
                         {project.description}
-                      </p>
+                      </motion.p>
                       
                       <div className="flex flex-wrap gap-2 mb-4">
                         {project.tech.map((tech, techIndex) => (
@@ -512,13 +698,19 @@ const Index = () => {
         <section id="contact" className="py-20">
           <div className="container mx-auto px-6">
             <motion.h2 
-              className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl font-bold text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Get In Touch
+              <motion.span 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                variants={textUpDownVariants}
+                animate="animate"
+              >
+                Get In Touch
+              </motion.span>
             </motion.h2>
             
             <motion.div 
@@ -536,7 +728,13 @@ const Index = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.1 }}
                     >
-                      <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Name</label>
+                      <motion.label 
+                        className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
+                        variants={textUpDownVariants}
+                        animate="animate"
+                      >
+                        Name
+                      </motion.label>
                       <Input 
                         type="text" 
                         required 
@@ -550,7 +748,13 @@ const Index = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                      <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Email</label>
+                      <motion.label 
+                        className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
+                        variants={textUpDownVariants}
+                        animate="animate"
+                      >
+                        Email
+                      </motion.label>
                       <Input 
                         type="email" 
                         required 
@@ -564,7 +768,13 @@ const Index = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                      <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Message</label>
+                      <motion.label 
+                        className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
+                        variants={textUpDownVariants}
+                        animate="animate"
+                      >
+                        Message
+                      </motion.label>
                       <Textarea 
                         required 
                         rows={5}
@@ -607,7 +817,9 @@ const Index = () => {
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                Made with ❤️ by Rupam Kumar Singh
+                <motion.span variants={textUpDownVariants} animate="animate">
+                  Made with ❤️ by Rupam Kumar Singh | Codelabs India
+                </motion.span>
               </motion.p>
               
               <div className="flex justify-center space-x-6">
@@ -615,7 +827,8 @@ const Index = () => {
                   { href: "https://github.com/RupamSingh333", icon: Github },
                   { href: "https://www.linkedin.com/in/rupam-kumar-1061321b2", icon: Linkedin },
                   { href: "https://www.facebook.com/Rupamsingh.0007", icon: Facebook },
-                  { href: "https://www.instagram.com/rupamsingh_007", icon: Instagram }
+                  { href: "https://www.instagram.com/rupamsingh_007", icon: Instagram },
+                  { href: "https://youtube.com/@codelabs_india?si=GtP7PycEuJZFVar0", icon: Youtube }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
