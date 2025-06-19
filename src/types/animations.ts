@@ -8,7 +8,7 @@ export const containerVariants: Variants = {
     transition: {
       delayChildren: 0.2,
       staggerChildren: 0.15,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
 };
@@ -20,7 +20,7 @@ export const itemVariants: Variants = {
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
 };
@@ -32,7 +32,7 @@ export const nameVariants: Variants = {
     scale: 1,
     transition: {
       duration: 1.2,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
 };
@@ -44,18 +44,18 @@ export const letterVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
 };
 
-// Fixed smooth animation variants with proper easing
+// Fixed animation objects with proper easing
 export const smoothBounceAnimation = {
   y: [0, -15, 0],
   transition: {
     duration: 4,
     repeat: Infinity,
-    ease: "easeInOut"
+    ease: [0.4, 0.0, 0.2, 1]
   }
 };
 
@@ -64,7 +64,7 @@ export const textUpDownAnimation = {
   transition: {
     duration: 3,
     repeat: Infinity,
-    ease: "easeInOut"
+    ease: [0.4, 0.0, 0.2, 1]
   }
 };
 
@@ -81,7 +81,7 @@ export const liquidGlassVariants: Variants = {
     borderRadius: ["50%", "30%", "0%"],
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.25, 0.46, 0.45, 0.94]
     }
   }
 };
