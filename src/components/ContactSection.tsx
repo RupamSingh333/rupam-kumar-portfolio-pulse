@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
+import { smoothBounceAnimation, textUpDownAnimation } from '@/types/animations';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -16,28 +17,6 @@ const ContactSection = () => {
       title: "Message Sent!",
       description: "Thank you for reaching out. I'll get back to you soon!",
     });
-  };
-
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const textUpDownVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
   };
 
   return (
@@ -52,8 +31,7 @@ const ContactSection = () => {
         >
           <motion.span 
             className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
-            variants={smoothBounceVariants}
-            animate="animate"
+            animate={smoothBounceAnimation}
           >
             Get In Touch
           </motion.span>
@@ -76,8 +54,7 @@ const ContactSection = () => {
                 >
                   <motion.label 
                     className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
-                    variants={textUpDownVariants}
-                    animate="animate"
+                    animate={textUpDownAnimation}
                   >
                     Name
                   </motion.label>
@@ -96,8 +73,7 @@ const ContactSection = () => {
                 >
                   <motion.label 
                     className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
-                    variants={textUpDownVariants}
-                    animate="animate"
+                    animate={textUpDownAnimation}
                   >
                     Email
                   </motion.label>
@@ -116,8 +92,7 @@ const ContactSection = () => {
                 >
                   <motion.label 
                     className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
-                    variants={textUpDownVariants}
-                    animate="animate"
+                    animate={textUpDownAnimation}
                   >
                     Message
                   </motion.label>

@@ -48,3 +48,22 @@ export const letterVariants: Variants = {
     }
   }
 };
+
+// Additional smooth animation variants for consistent use across components
+export const smoothBounceAnimation = {
+  y: [0, -15, 0],
+  transition: {
+    duration: 4,
+    repeat: Infinity,
+    ease: [0.25, 0.46, 0.45, 0.94]
+  }
+};
+
+export const textUpDownAnimation = {
+  y: [0, -8, 0],
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    ease: [0.25, 0.46, 0.45, 0.94]
+  }
+};

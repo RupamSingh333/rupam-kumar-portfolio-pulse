@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Moon, Sun, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { smoothBounceAnimation, textUpDownAnimation } from '@/types/animations';
 
 interface NavigationProps {
   isDark: boolean;
@@ -12,28 +13,6 @@ interface NavigationProps {
 const Navigation = ({ isDark, setIsDark }: NavigationProps) => {
   const handleCallUs = () => {
     window.open('tel:+918538945025', '_self');
-  };
-
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const textUpDownVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
   };
 
   return (
@@ -51,8 +30,7 @@ const Navigation = ({ isDark, setIsDark }: NavigationProps) => {
         >
           <motion.span 
             className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
-            variants={smoothBounceVariants}
-            animate="animate"
+            animate={smoothBounceAnimation}
           >
             Codelabs India
           </motion.span>
@@ -69,7 +47,7 @@ const Navigation = ({ isDark, setIsDark }: NavigationProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <motion.span variants={textUpDownVariants} animate="animate">
+              <motion.span animate={textUpDownAnimation}>
                 {item}
               </motion.span>
               <motion.div

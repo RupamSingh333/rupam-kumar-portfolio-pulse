@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Download, Github, Linkedin, Facebook, Instagram, Phone, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { nameVariants, letterVariants } from '@/types/animations';
+import { nameVariants, letterVariants, smoothBounceAnimation } from '@/types/animations';
 
 const HeroSection = () => {
   const [typewriterText, setTypewriterText] = useState('');
@@ -50,17 +50,6 @@ const HeroSection = () => {
     typeWriter();
   }, [currentWordIndex]);
 
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
       {/* Enhanced floating background elements */}
@@ -74,7 +63,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 10, 
           repeat: Infinity, 
-          ease: "easeInOut",
+          ease: [0.25, 0.46, 0.45, 0.94],
           delay: 0
         }}
       />
@@ -88,7 +77,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 12, 
           repeat: Infinity, 
-          ease: "easeInOut",
+          ease: [0.25, 0.46, 0.45, 0.94],
           delay: 2
         }}
       />
@@ -102,7 +91,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 8, 
           repeat: Infinity, 
-          ease: "easeInOut",
+          ease: [0.25, 0.46, 0.45, 0.94],
           delay: 1
         }}
       />
@@ -172,7 +161,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <motion.span variants={smoothBounceVariants} animate="animate">
+            <motion.span animate={smoothBounceAnimation}>
               with passion and precision
             </motion.span>
           </motion.p>
@@ -251,8 +240,7 @@ const HeroSection = () => {
           >
             <motion.div
               className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 px-6 py-3 rounded-full backdrop-blur-sm border border-green-200 dark:border-green-700"
-              variants={smoothBounceVariants}
-              animate="animate"
+              animate={smoothBounceAnimation}
               whileHover={{ 
                 scale: 1.05,
                 boxShadow: "0 10px 25px rgba(34, 197, 94, 0.2)"

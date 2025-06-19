@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { containerVariants, itemVariants } from '@/types/animations';
+import { containerVariants, itemVariants, smoothBounceAnimation, textUpDownAnimation } from '@/types/animations';
 
 const ProjectsSection = () => {
   const projects = [
@@ -63,28 +63,6 @@ const ProjectsSection = () => {
     }
   ];
 
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const textUpDownVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <section id="projects" className="py-20 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm">
       <div className="container mx-auto px-6">
@@ -97,8 +75,7 @@ const ProjectsSection = () => {
         >
           <motion.span 
             className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
-            variants={smoothBounceVariants}
-            animate="animate"
+            animate={smoothBounceAnimation}
           >
             Featured Projects
           </motion.span>
@@ -139,7 +116,7 @@ const ProjectsSection = () => {
                         duration: 4, 
                         repeat: Infinity, 
                         delay: index * 0.5,
-                        ease: "easeInOut"
+                        ease: [0.25, 0.46, 0.45, 0.94]
                       }}
                     >
                       {project.image}
@@ -157,15 +134,13 @@ const ProjectsSection = () => {
                   <motion.h3 
                     className="text-xl font-bold mb-3 text-slate-800 dark:text-slate-200"
                     whileHover={{ color: "#3b82f6" }}
-                    variants={textUpDownVariants}
-                    animate="animate"
+                    animate={textUpDownAnimation}
                   >
                     {project.title}
                   </motion.h3>
                   <motion.p 
                     className="text-slate-600 dark:text-slate-300 mb-4 text-sm leading-relaxed"
-                    variants={textUpDownVariants}
-                    animate="animate"
+                    animate={textUpDownAnimation}
                   >
                     {project.description}
                   </motion.p>

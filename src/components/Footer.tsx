@@ -1,19 +1,9 @@
 
 import { Github, Linkedin, Facebook, Instagram, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { smoothBounceAnimation } from '@/types/animations';
 
 const Footer = () => {
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <motion.footer 
       className="py-12 bg-slate-100/70 dark:bg-slate-900/70 backdrop-blur-sm border-t border-slate-200 dark:border-slate-700"
@@ -29,7 +19,7 @@ const Footer = () => {
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <motion.span variants={smoothBounceVariants} animate="animate">
+            <motion.span animate={smoothBounceAnimation}>
               Made with ❤️ by Rupam Kumar Singh | Codelabs India
             </motion.span>
           </motion.p>

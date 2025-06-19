@@ -1,30 +1,9 @@
 
 import { MapPin, Mail, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { smoothBounceAnimation, textUpDownAnimation } from '@/types/animations';
 
 const AboutSection = () => {
-  const smoothBounceVariants = {
-    animate: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const textUpDownVariants = {
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
     <section id="about" className="py-20 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm">
       <div className="container mx-auto px-6">
@@ -37,8 +16,7 @@ const AboutSection = () => {
         >
           <motion.span 
             className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
-            variants={smoothBounceVariants}
-            animate="animate"
+            animate={smoothBounceAnimation}
           >
             About Me
           </motion.span>
@@ -55,8 +33,7 @@ const AboutSection = () => {
             >
               <motion.p 
                 className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
-                variants={textUpDownVariants}
-                animate="animate"
+                animate={textUpDownAnimation}
               >
                 I'm a passionate software developer at <strong className="text-blue-600 font-semibold">Codelabs India</strong> with expertise in modern web technologies and AI integration. 
                 I love creating digital solutions that make a real impact.
@@ -64,8 +41,7 @@ const AboutSection = () => {
               
               <motion.p 
                 className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
-                variants={textUpDownVariants}
-                animate="animate"
+                animate={textUpDownAnimation}
               >
                 With experience in full-stack development, I specialize in building scalable applications 
                 using React, Next.js, Node.js, and various databases. I'm also passionate about integrating 
@@ -76,8 +52,7 @@ const AboutSection = () => {
                 <motion.div 
                   className="flex items-center space-x-2 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 px-4 py-2 rounded-full"
                   whileHover={{ x: 5, scale: 1.05 }}
-                  variants={textUpDownVariants}
-                  animate="animate"
+                  animate={textUpDownAnimation}
                 >
                   <MapPin className="h-5 w-5 text-blue-600" />
                   <span>India</span>
@@ -85,8 +60,7 @@ const AboutSection = () => {
                 <motion.div 
                   className="flex items-center space-x-2 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 px-4 py-2 rounded-full"
                   whileHover={{ x: 5, scale: 1.05 }}
-                  variants={textUpDownVariants}
-                  animate="animate"
+                  animate={textUpDownAnimation}
                 >
                   <Mail className="h-5 w-5 text-blue-600" />
                   <span>rupamkumar333@gmail.com</span>
@@ -94,8 +68,7 @@ const AboutSection = () => {
                 <motion.div 
                   className="flex items-center space-x-2 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 px-4 py-2 rounded-full"
                   whileHover={{ x: 5, scale: 1.05 }}
-                  variants={textUpDownVariants}
-                  animate="animate"
+                  animate={textUpDownAnimation}
                 >
                   <Youtube className="h-5 w-5 text-red-600" />
                   <a 
@@ -126,7 +99,7 @@ const AboutSection = () => {
                 transition={{ 
                   duration: 8, 
                   repeat: Infinity, 
-                  ease: "easeInOut" 
+                  ease: [0.25, 0.46, 0.45, 0.94]
                 }}
               />
               <motion.div 
@@ -136,8 +109,7 @@ const AboutSection = () => {
               >
                 <div className="w-64 h-64 bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 rounded-full flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
                   <motion.span 
-                    variants={smoothBounceVariants} 
-                    animate="animate"
+                    animate={smoothBounceAnimation}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-100"
                   >
                     RKS
