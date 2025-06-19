@@ -8,7 +8,7 @@ export const containerVariants: Variants = {
     transition: {
       delayChildren: 0.2,
       staggerChildren: 0.15,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: "easeOut"
     }
   }
 };
@@ -20,7 +20,7 @@ export const itemVariants: Variants = {
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: "easeOut"
     }
   }
 };
@@ -32,7 +32,7 @@ export const nameVariants: Variants = {
     scale: 1,
     transition: {
       duration: 1.2,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: "easeOut"
     }
   }
 };
@@ -44,18 +44,18 @@ export const letterVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.25, 0.46, 0.45, 0.94]
+      ease: "easeOut"
     }
   }
 };
 
-// Additional smooth animation variants for consistent use across components
+// Fixed smooth animation variants with proper easing
 export const smoothBounceAnimation = {
   y: [0, -15, 0],
   transition: {
     duration: 4,
     repeat: Infinity,
-    ease: [0.25, 0.46, 0.45, 0.94]
+    ease: "easeInOut"
   }
 };
 
@@ -64,6 +64,24 @@ export const textUpDownAnimation = {
   transition: {
     duration: 3,
     repeat: Infinity,
-    ease: [0.25, 0.46, 0.45, 0.94]
+    ease: "easeInOut"
+  }
+};
+
+// Liquid glass effect for navigation
+export const liquidGlassVariants: Variants = {
+  initial: {
+    scale: 0,
+    opacity: 0,
+    borderRadius: "50%"
+  },
+  animate: {
+    scale: [0, 1.5, 1],
+    opacity: [0, 0.8, 0],
+    borderRadius: ["50%", "30%", "0%"],
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
   }
 };

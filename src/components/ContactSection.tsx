@@ -1,32 +1,20 @@
 
-import { Mail } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { useToast } from '@/hooks/use-toast';
 import { smoothBounceAnimation, textUpDownAnimation } from '@/types/animations';
 
 const ContactSection = () => {
-  const { toast } = useToast();
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-  };
-
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-20 bg-slate-50/60 dark:bg-slate-800/60 backdrop-blur-sm">
       <div className="container mx-auto px-6">
         <motion.h2 
           className="text-4xl md:text-5xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           <motion.span 
@@ -37,92 +25,75 @@ const ContactSection = () => {
           </motion.span>
         </motion.h2>
         
-        <motion.div 
-          className="max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          viewport={{ once: true }}
-        >
-          <Card className="border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm shadow-2xl">
-            <CardContent className="p-8">
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <motion.label 
-                    className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <motion.div animate={textUpDownAnimation}>
+                <h3 className="text-2xl font-bold mb-4 text-slate-800 dark:text-slate-200">
+                  Let's Create Something Amazing Together
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  I'm always excited to work on new projects and collaborate with fellow developers. 
+                  Whether you have a project in mind or just want to say hello, feel free to reach out!
+                </p>
+              </motion.div>
+              
+              <div className="space-y-6">
+                {[
+                  { icon: Mail, text: 'rupamkumar333@gmail.com', href: 'mailto:rupamkumar333@gmail.com' },
+                  { icon: Phone, text: '+91 8538945025', href: 'tel:+918538945025' },
+                  { icon: MapPin, text: 'India', href: '#' }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-center space-x-4 p-4 bg-white/70 dark:bg-slate-700/70 rounded-lg backdrop-blur-sm hover:bg-white/90 dark:hover:bg-slate-700/90 transition-all duration-300"
+                    whileHover={{ x: 5, scale: 1.02 }}
                     animate={textUpDownAnimation}
                   >
-                    Name
-                  </motion.label>
-                  <Input 
-                    type="text" 
-                    required 
-                    className="w-full border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-700/80 transition-all duration-500 focus:scale-105 focus:shadow-lg"
-                    placeholder="Your full name"
-                  />
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    <item.icon className="h-6 w-6 text-blue-600" />
+                    <span className="text-slate-700 dark:text-slate-300">{item.text}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-white/70 dark:bg-slate-700/70 p-8 rounded-2xl backdrop-blur-sm shadow-xl"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <Input placeholder="Your Name" className="bg-white/50 dark:bg-slate-600/50" />
+                  <Input placeholder="Your Email" type="email" className="bg-white/50 dark:bg-slate-600/50" />
+                </div>
+                <Input placeholder="Subject" className="bg-white/50 dark:bg-slate-600/50" />
+                <Textarea 
+                  placeholder="Your Message"
+                  rows={5}
+                  className="bg-white/50 dark:bg-slate-600/50"
+                />
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <motion.label 
-                    className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
-                    animate={textUpDownAnimation}
-                  >
-                    Email
-                  </motion.label>
-                  <Input 
-                    type="email" 
-                    required 
-                    className="w-full border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-700/80 transition-all duration-500 focus:scale-105 focus:shadow-lg"
-                    placeholder="your.email@example.com"
-                  />
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <motion.label 
-                    className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300"
-                    animate={textUpDownAnimation}
-                  >
-                    Message
-                  </motion.label>
-                  <Textarea 
-                    required 
-                    rows={5}
-                    className="w-full border-slate-300 dark:border-slate-600 bg-white/80 dark:bg-slate-700/80 transition-all duration-500 focus:scale-105 focus:shadow-lg"
-                    placeholder="Tell me about your project or just say hello!"
-                  />
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: "0 15px 30px rgba(59, 130, 246, 0.3)"
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-700 hover:via-purple-700 hover:to-cyan-600 text-white py-3 rounded-lg transition-all duration-500 shadow-lg"
-                  >
-                    <Mail className="mr-2 h-5 w-5" />
+                  <Button className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 hover:from-blue-700 hover:via-purple-700 hover:to-cyan-600 text-white py-3 rounded-full transition-all duration-500">
+                    <Send className="mr-2 h-5 w-5" />
                     Send Message
                   </Button>
                 </motion.div>
               </form>
-            </CardContent>
-          </Card>
-        </motion.div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

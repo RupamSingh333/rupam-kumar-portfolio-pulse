@@ -9,7 +9,7 @@ const Footer = () => {
       className="py-12 bg-slate-100/70 dark:bg-slate-900/70 backdrop-blur-sm border-t border-slate-200 dark:border-slate-700"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 1, ease: "easeOut" }}
       viewport={{ once: true }}
     >
       <div className="container mx-auto px-6">
@@ -20,7 +20,7 @@ const Footer = () => {
             transition={{ duration: 4, repeat: Infinity }}
           >
             <motion.span animate={smoothBounceAnimation}>
-              Made with ❤️ by Rupam Kumar Singh | Codelabs India
+              Made with ❤️ by Rupam Singh | Codelabs India
             </motion.span>
           </motion.p>
           
@@ -50,7 +50,7 @@ const Footer = () => {
                 transition={{ 
                   duration: 0.8, 
                   delay: index * 0.1,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  ease: "easeOut"
                 }}
               >
                 <social.icon className="h-6 w-6" />

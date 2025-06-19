@@ -11,7 +11,7 @@ const AboutSection = () => {
           className="text-4xl md:text-5xl font-bold text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           <motion.span 
@@ -28,7 +28,7 @@ const AboutSection = () => {
               className="space-y-6"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1, ease: "easeOut" }}
               viewport={{ once: true }}
             >
               <motion.p 
@@ -87,7 +87,7 @@ const AboutSection = () => {
               className="relative"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 1, ease: "easeOut" }}
               viewport={{ once: true }}
             >
               <motion.div 
@@ -99,7 +99,7 @@ const AboutSection = () => {
                 transition={{ 
                   duration: 8, 
                   repeat: Infinity, 
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  ease: "easeInOut"
                 }}
               />
               <motion.div 
@@ -112,7 +112,7 @@ const AboutSection = () => {
                     animate={smoothBounceAnimation}
                     className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-100"
                   >
-                    RKS
+                    RS
                   </motion.span>
                 </div>
               </motion.div>

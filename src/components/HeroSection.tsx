@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Download, Github, Linkedin, Facebook, Instagram, Phone, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -63,7 +62,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 10, 
           repeat: Infinity, 
-          ease: [0.25, 0.46, 0.45, 0.94],
+          ease: "easeInOut",
           delay: 0
         }}
       />
@@ -77,7 +76,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 12, 
           repeat: Infinity, 
-          ease: [0.25, 0.46, 0.45, 0.94],
+          ease: "easeInOut",
           delay: 2
         }}
       />
@@ -91,7 +90,7 @@ const HeroSection = () => {
         transition={{ 
           duration: 8, 
           repeat: Infinity, 
-          ease: [0.25, 0.46, 0.45, 0.94],
+          ease: "easeInOut",
           delay: 1
         }}
       />
@@ -100,16 +99,16 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          {/* Enhanced name animation */}
+          {/* Updated name without "Kumar" and same effect as "building digital experiences" */}
           <motion.h1 
             className="text-5xl md:text-7xl font-bold mb-6"
             variants={nameVariants}
             initial="hidden"
             animate="visible"
           >
-            {"Rupam Kumar Singh".split("").map((char, index) => (
+            {"Rupam Singh".split("").map((char, index) => (
               <motion.span
                 key={index}
                 className="inline-block bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 bg-clip-text text-transparent"
@@ -119,7 +118,7 @@ const HeroSection = () => {
                 transition={{ 
                   duration: 0.8, 
                   delay: index * 0.05,
-                  ease: [0.25, 0.46, 0.45, 0.94]
+                  ease: "easeOut"
                 }}
                 whileHover={{ 
                   scale: 1.2, 
@@ -136,7 +135,7 @@ const HeroSection = () => {
             className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-4 max-w-3xl mx-auto h-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
             <motion.span
               key={typewriterText}
@@ -159,7 +158,7 @@ const HeroSection = () => {
             className="text-lg text-slate-500 dark:text-slate-400 mb-8 font-medium"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
           >
             <motion.span animate={smoothBounceAnimation}>
               with passion and precision
@@ -170,7 +169,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.0, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1, delay: 1.0, ease: "easeOut" }}
           >
             <motion.div 
               whileHover={{ 
@@ -187,7 +186,7 @@ const HeroSection = () => {
                 onClick={() => {
                   const link = document.createElement('a');
                   link.href = '/resume.pdf';
-                  link.download = 'Rupam_Kumar_Singh_Resume.pdf';
+                  link.download = 'Rupam_Singh_Resume.pdf';
                   link.click();
                 }}
               >
@@ -222,7 +221,7 @@ const HeroSection = () => {
                   transition={{ 
                     duration: 0.8, 
                     delay: 1.2 + index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94]
+                    ease: "easeOut"
                   }}
                 >
                   <social.icon className="h-6 w-6" />
@@ -236,7 +235,7 @@ const HeroSection = () => {
             className="text-lg font-semibold text-slate-600 dark:text-slate-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1, delay: 1.4, ease: "easeOut" }}
           >
             <motion.div
               className="flex items-center justify-center space-x-2 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 px-6 py-3 rounded-full backdrop-blur-sm border border-green-200 dark:border-green-700"
